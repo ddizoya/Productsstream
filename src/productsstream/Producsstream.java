@@ -56,7 +56,7 @@ public class Producsstream {
 			dis = new DataInputStream(new FileInputStream(file));
 
 			byte i = 1;
-			while (dis.available() > 0 && i <= 2) {
+			while (dis.available() > 0) {
 				obj.setCodigo(dis.readUTF());
 				obj.setDescripcion(dis.readUTF());
 				obj.setPrecio(dis.readByte());
@@ -68,20 +68,6 @@ public class Producsstream {
 			}
 			i = 0;
 
-			/**
-			 * >>NOTA MENTAL PARA MI YO DEL FUTURO
-			 * 
-			 * El while lleva i<=2 para limitar al máximo dos vueltas de
-			 * lectura. ¿Por qué? Si ejecutamos muchas veces el programa, al
-			 * llevar el FileInputStream un true por parámetro, escribirá todo
-			 * el rato al final del fichero nuevos datos, que en la impresión
-			 * nos dirán que son de un objeto p03, po4 ... pon sucesivamente.
-			 * (true --> append) Otra opción sería, en el finally{} usar el
-			 * método file.deleteOnExit() o delete(), teniendo que crearse de
-			 * cero y evitando la suma indefinida de nuevos datos repetidos, pero
-			 * dudo que a Ricardo le guste.
-			 */
-
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -90,9 +76,7 @@ public class Producsstream {
 			e.printStackTrace();
 		} finally {
 			try {
-
 				dos.close();
-				// file.deleteOnExit();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
